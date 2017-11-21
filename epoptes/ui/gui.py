@@ -333,7 +333,7 @@ class EpoptesGui(object):
         self.execOnSelectedClients(['reset_screensaver'],
             mode=EM_SYSTEM_AND_SESSION)
         self.execOnSelectedClients(["receive_broadcast", self.vncserverport, 
-            self.pwd, fullscreen], mode=EM_SYSTEM_OR_SESSION)
+            self.pwd, fullscreen], mode=EM_SESSION_OR_SYSTEM)
 
 
     def broadcastScreen(self, widget):
