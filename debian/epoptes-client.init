@@ -12,6 +12,7 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/epoptes-client
+DEFAULT=/etc/default/epoptes-client
 NAME=epoptes-client
 DESC="Epoptes client LTSP helper"
 
@@ -28,6 +29,10 @@ grep -qs "init=/sbin/init-ltsp" /proc/cmdline && exit 0
 
 case "$1" in
     start|restart|force-reload)
+        [ -s /etc/epoptes/server.crt ] || (
+            [ -f "$DEFAULT" ] && . "$DEFAULT"
+            "$DAEMON" -c "$SERVER"
+        )
         "$DAEMON" &
         ;;
     stop)
